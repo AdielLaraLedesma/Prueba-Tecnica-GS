@@ -14,50 +14,50 @@ USE creditDB;
 GO
 
 CREATE TABLE Branch (
-    id INT IDENTITY(1,1),
-    name NVARCHAR(100) NOT NULL,
-    address NVARCHAR(255) NOT NULL
+    Id INT IDENTITY(1,1),
+    Name NVARCHAR(100) NOT NULL,
+    Address NVARCHAR(255) NOT NULL
 );
 GO
 ALTER TABLE Branch
-ADD CONSTRAINT branch_pk PRIMARY KEY (id);
+ADD CONSTRAINT BranchPK PRIMARY KEY (Id);
 GO
 
 
 CREATE TABLE Client (
-    id INT IDENTITY(1,1),
-    first_name NVARCHAR(100) NOT NULL,
-    last_name NVARCHAR(100) NOT NULL,
-    email NVARCHAR(100) NOT NULL,
-    branch_id INT
+    Id INT IDENTITY(1,1),
+    FirstName NVARCHAR(100) NOT NULL,
+    LastName NVARCHAR(100) NOT NULL,
+    Email NVARCHAR(100) NOT NULL,
+    BranchId INT
 );
 GO
 ALTER TABLE Client
-ADD CONSTRAINT client_pk PRIMARY KEY (id);
+ADD CONSTRAINT ClientPK PRIMARY KEY (id);
 GO
 ALTER TABLE Client
-ADD CONSTRAINT branch_id_fk FOREIGN KEY (branch_id) REFERENCES Branch(id);
+ADD CONSTRAINT ClientBranchIdFK FOREIGN KEY (BranchId) REFERENCES Branch(Id);
 GO
 
 
 CREATE TABLE CreditRequest (
-    id INT IDENTITY(1,1),
-    client_id INT,
-    amount DECIMAL(18, 2) NOT NULL,
-    request_date DATETIME NOT NULL DEFAULT GETDATE(),
-    status NVARCHAR(20) NOT NULL,
-    branch_id INT
+    Id INT IDENTITY(1,1),
+    ClientId INT,
+    Amount DECIMAL(18, 2) NOT NULL,
+    RequestDate DATETIME NOT NULL DEFAULT GETDATE(),
+    Status NVARCHAR(20) NOT NULL,
+    BranchId INT
 );
 GO
 ALTER TABLE CreditRequest
-ADD CONSTRAINT credit_request_pk PRIMARY KEY (id);
+ADD CONSTRAINT CreditRequestPK PRIMARY KEY (Id);
 GO
 ALTER TABLE CreditRequest
-ADD CONSTRAINT credit_request_status_chk CHECK (status IN ('APPROVED', 'REJECTED'));
+ADD CONSTRAINT CreditRequestStatusCHK CHECK (status IN ('APPROVED', 'REJECTED'));
 GO
 ALTER TABLE CreditRequest
-ADD CONSTRAINT credit_request_branch_id_fk FOREIGN KEY (branch_id) REFERENCES Branch(id);
+ADD CONSTRAINT CreditRequestBranchIdFK FOREIGN KEY (BranchId) REFERENCES Branch(Id);
 GO
 ALTER TABLE CreditRequest
-ADD CONSTRAINT credit_request_client_id_fk FOREIGN KEY (client_id) REFERENCES Branch(id);
+ADD CONSTRAINT CreditRequestClientIdFK FOREIGN KEY (ClientId) REFERENCES Branch(Id);
 GO
