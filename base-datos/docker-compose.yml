@@ -1,0 +1,20 @@
+version: '2'
+services:
+  sqlserver:
+    container_name: sqlserver
+    hostname: sqlserver
+    ##build:
+    ##  context: sqlserverdocker
+    ##  dockerfile: Dockerfile
+    image: mcr.microsoft.com/mssql/server:2019-lsatest
+    ports:
+      - "1433:1433"
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: passWord-12345*
+    networks:
+      - prueba-tecnica-network
+networks:
+  prueba-tecnica-network:
+    external:
+      name: prueba-tecnica-net
