@@ -1,5 +1,6 @@
-package com.adiel.prueba_tecnica_backend.application.exception;
+package com.adiel.prueba_tecnica_backend.infrastructure.exception;
 
+import com.adiel.prueba_tecnica_backend.domain.models.ErrorResponse;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -13,8 +14,13 @@ import java.util.Map;
 @ControllerAdvice
 public class MapperException {
 
+    private static final Integer STATUS_400 = 400;
+    private static final Integer STATUS_409 = 409;
+    private static final String MESSAGE_400 = "Request invalido. Favor de validar los datos enviados.";
+    private static final String MESSAGE_409 = "El recurso relacionado no existe. Favor de verificar los datos enviados.";
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Object> handleValidationExceptions(
+    public ResponseEntity<ErrorResponse> handleValidationExceptions(
             MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
@@ -22,16 +28,21 @@ public class MapperException {
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
-        return ResponseEntity.badRequest().body(Map.of(
-                "status", 400,
-                "message", "Request invalido. Favor de validar los datos enviados.",
-                "details", errors
-        ));
+
+        ErrorResponse errorResponse = new ErrorResponse(
+                STATUS_400,
+                MESSAGE_400,
+                errors);
+        return ResponseEntity.status(STATUS_400).body(errorResponse);
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<Object> handlerSqlServerException(DataIntegrityViolationException ex){
-        return ResponseEntity.badRequest().body(Map.of("status", 409, "message","El recurso relacionado no existe. Favor de verificar los datos enviados.", "details", ex.getMessage()));
+        ErrorResponse errorResponse = new ErrorResponse(
+                STATUS_409,
+                MESSAGE_409,
+                ex.getMessage());
+        return ResponseEntity.status(STATUS_409).body(errorResponse);
 
     }
 
