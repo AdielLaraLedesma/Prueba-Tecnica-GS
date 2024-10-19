@@ -16,7 +16,6 @@ public class CreditRequest {
     @NotNull(message = "El id de la sucursal no puede ser nulo")
     @Positive(message = "El id de la sucursal debe de ser positivo")
     private final Long branchId;
-    private CreditDecision decision;
 
     public CreditRequest(
             Long clientId,
@@ -25,10 +24,6 @@ public class CreditRequest {
         this.clientId = clientId;
         this.amount = amount;
         this.branchId = branchId;
-    }
-
-    public boolean isEligible() {
-        return amount.compareTo(BigDecimal.valueOf(5000)) <= 0;
     }
 
     public Long getClientId() {
@@ -43,11 +38,4 @@ public class CreditRequest {
         return branchId;
     }
 
-    public CreditDecision getDecision() {
-        return decision;
-    }
-
-    public void setDecision(CreditDecision decision) {
-        this.decision = decision;
-    }
 }

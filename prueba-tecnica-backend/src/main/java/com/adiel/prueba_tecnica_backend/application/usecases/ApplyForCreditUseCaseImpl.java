@@ -6,6 +6,8 @@ import com.adiel.prueba_tecnica_backend.domain.models.CreditResponse;
 import com.adiel.prueba_tecnica_backend.domain.ports.in.ApplyForCreditUseCase;
 import com.adiel.prueba_tecnica_backend.domain.ports.out.RequestCreditRepositoryPort;
 
+import java.math.BigDecimal;
+
 public class ApplyForCreditUseCaseImpl implements ApplyForCreditUseCase {
 
     private final RequestCreditRepositoryPort repositoryPort;
@@ -16,11 +18,16 @@ public class ApplyForCreditUseCaseImpl implements ApplyForCreditUseCase {
 
     @Override
     public CreditResponse applyCredit(CreditRequest request) {
-        if (request.isEligible()) {
-            request.setDecision(CreditDecision.APPROVED);
+        CreditDecision creditDecision;
+        if (isEligible(request.getAmount())) {
+            creditDecision = CreditDecision.APPROVED;
         } else {
-            request.setDecision(CreditDecision.REJECTED);
+            creditDecision = CreditDecision.REJECTED;
         }
-        return repositoryPort.save(request);
+        return repositoryPort.save(request, creditDecision);
+    }
+
+    public boolean isEligible(BigDecimal amount) {
+        return amount.compareTo(BigDecimal.valueOf(5000)) <= 0;
     }
 }

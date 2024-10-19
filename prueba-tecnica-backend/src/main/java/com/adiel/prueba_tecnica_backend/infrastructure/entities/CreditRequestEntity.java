@@ -28,22 +28,18 @@ public class CreditRequestEntity {
     public CreditRequestEntity() {
     }
 
-    public CreditRequestEntity(Long id, Long clientId, BigDecimal amount, LocalDateTime requestDate, String status, Long branchId) {
-        this.id = id;
+    public CreditRequestEntity(Long clientId, BigDecimal amount, String status, Long branchId) {
         this.clientId = clientId;
         this.amount = amount;
-        this.requestDate = requestDate;
         this.status = status;
         this.branchId = branchId;
     }
 
-    public static CreditRequestEntity fromDomainModel(CreditRequest creditRequest){
+    public static CreditRequestEntity fromDomainModel(CreditRequest creditRequest, CreditDecision decision){
         return new CreditRequestEntity(
-                null,
                 creditRequest.getClientId(),
                 creditRequest.getAmount(),
-                null,
-                creditRequest.getDecision().name(),
+                decision.name(),
                 creditRequest.getBranchId()
         );
     }

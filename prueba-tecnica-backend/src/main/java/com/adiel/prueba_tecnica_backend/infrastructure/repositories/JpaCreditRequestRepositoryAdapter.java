@@ -1,5 +1,6 @@
 package com.adiel.prueba_tecnica_backend.infrastructure.repositories;
 
+import com.adiel.prueba_tecnica_backend.domain.models.CreditDecision;
 import com.adiel.prueba_tecnica_backend.domain.models.CreditRequest;
 import com.adiel.prueba_tecnica_backend.domain.models.CreditResponse;
 import com.adiel.prueba_tecnica_backend.domain.ports.out.RequestCreditRepositoryPort;
@@ -16,8 +17,8 @@ public class JpaCreditRequestRepositoryAdapter implements RequestCreditRepositor
     }
 
     @Override
-    public CreditResponse save(CreditRequest request) {
-        CreditRequestEntity entity = CreditRequestEntity.fromDomainModel(request);
+    public CreditResponse save(CreditRequest request, CreditDecision decision) {
+        CreditRequestEntity entity = CreditRequestEntity.fromDomainModel(request, decision);
         CreditRequestEntity savedEntity = repository.save(entity);
         return savedEntity.toDomainModel();
     }

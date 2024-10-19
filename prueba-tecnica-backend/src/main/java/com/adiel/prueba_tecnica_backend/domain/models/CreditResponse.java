@@ -70,10 +70,6 @@ public class CreditResponse {
         this.decision = decision;
     }
 
-    public boolean isEligible() {
-        return amount.compareTo(BigDecimal.valueOf(5000)) <= 0;
-    }
-
     public Branch getBranch() {
         return branch;
     }
