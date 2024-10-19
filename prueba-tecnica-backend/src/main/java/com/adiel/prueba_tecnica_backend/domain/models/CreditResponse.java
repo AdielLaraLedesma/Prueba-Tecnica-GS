@@ -6,28 +6,28 @@ import java.time.LocalDateTime;
 public class CreditResponse {
 
     private Long id;
-    private Client client;
+    private Long clientId;
     private BigDecimal amount;
     private LocalDateTime requestDate;
     private CreditDecision decision;
-    private Branch branch;
+    private Long branchId;
 
     public CreditResponse() {
     }
 
     public CreditResponse(
             Long id,
-            Client client,
+            Long clientId,
             BigDecimal amount,
             LocalDateTime requestDate,
             CreditDecision decision,
-            Branch branch) {
+            Long branchId) {
         this.id = id;
-        this.client = client;
+        this.clientId = clientId;
         this.amount = amount;
         this.requestDate = requestDate;
         this.decision = decision;
-        this.branch = branch;
+        this.branchId = branchId;
     }
 
     public Long getId() {
@@ -38,12 +38,12 @@ public class CreditResponse {
         this.id = id;
     }
 
-    public Client getClient() {
-        return client;
+    public Long getClientId() {
+        return clientId;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
     }
 
     public BigDecimal getAmount() {
@@ -70,11 +70,11 @@ public class CreditResponse {
         this.decision = decision;
     }
 
-    public Branch getBranch() {
-        return branch;
+    public Long getBranchId() {
+        return branchId;
     }
 
-    public void setBranch(Branch branch) {
-        this.branch = branch;
+    public void setBranchId(Long branchId) {
+        this.branchId = branchId;
     }
 }

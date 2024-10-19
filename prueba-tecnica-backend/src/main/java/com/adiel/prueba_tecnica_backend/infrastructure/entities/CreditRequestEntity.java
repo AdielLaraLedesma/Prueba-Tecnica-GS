@@ -2,6 +2,7 @@ package com.adiel.prueba_tecnica_backend.infrastructure.entities;
 
 import com.adiel.prueba_tecnica_backend.domain.models.*;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ public class CreditRequestEntity {
     @Column(name = "Amount")
     private BigDecimal amount;
     @Column(name = "RequestDate")
+    @CreationTimestamp
     private LocalDateTime requestDate;
     @Column(name = "Status")
     private String status;
@@ -47,11 +49,11 @@ public class CreditRequestEntity {
     public CreditResponse toDomainModel(){
         return new CreditResponse(
                 id,
-                new Client(),
+                clientId,
                 amount,
                 requestDate,
                 CreditDecision.valueOf(status),
-                new Branch()
+                branchId
                 );
     }
 
