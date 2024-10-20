@@ -14,10 +14,10 @@ import java.util.Map;
 @ControllerAdvice
 public class MapperException {
 
-    private static final Integer STATUS_400 = 400;
-    private static final Integer STATUS_409 = 409;
-    private static final String MESSAGE_400 = "Request invalido. Favor de validar los datos enviados.";
-    private static final String MESSAGE_409 = "El recurso relacionado no existe. Favor de verificar los datos enviados.";
+    public static final Integer STATUS_400 = 400;
+    public static final Integer STATUS_409 = 409;
+    public static final String MESSAGE_400 = "Request invalido. Favor de validar los datos enviados.";
+    public static final String MESSAGE_409 = "El recurso relacionado no existe. Favor de verificar los datos enviados.";
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidationExceptions(
@@ -37,7 +37,7 @@ public class MapperException {
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<Object> handlerSqlServerException(DataIntegrityViolationException ex){
+    public ResponseEntity<ErrorResponse> handleDataIntegrityViolationException(DataIntegrityViolationException ex){
         ErrorResponse errorResponse = new ErrorResponse(
                 STATUS_409,
                 MESSAGE_409,

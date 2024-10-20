@@ -32,7 +32,7 @@ public class ClientEntity {
     }
 
     public Client toDomainModel(){
-        return new Client(id, firstName, lastName, email);
+        return new Client(id, firstName, lastName, email, branchId);
     }
 
     public Long getId() {

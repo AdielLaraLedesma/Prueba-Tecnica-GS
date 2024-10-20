@@ -6,15 +6,22 @@ public class Client {
     private String firstName;
     private String lastName;
     private String email;
+    private Long branchId;
 
     public Client() {
     }
 
-    public Client(Long id, String firstName, String lastName, String email) {
+    public Client(
+            Long id,
+            String firstName,
+            String lastName,
+            String email,
+            Long branchId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.branchId = branchId;
     }
 
     public Long getId() {
@@ -47,5 +54,13 @@ public class Client {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Long getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(Long branchId) {
+        this.branchId = branchId;
     }
 }

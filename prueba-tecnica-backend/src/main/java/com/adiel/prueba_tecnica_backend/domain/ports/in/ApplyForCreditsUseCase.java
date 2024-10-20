@@ -4,7 +4,7 @@ import com.adiel.prueba_tecnica_backend.domain.models.CreditResponse;
 
 import java.util.List;
 
-public interface ApplyForCreditsUserCase {
+public interface ApplyForCreditsUseCase {
 
     List<CreditResponse> applyCredit(int total);
 

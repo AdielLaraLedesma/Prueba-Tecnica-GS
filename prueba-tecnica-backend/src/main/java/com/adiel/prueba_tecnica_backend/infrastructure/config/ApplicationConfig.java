@@ -3,6 +3,7 @@ package com.adiel.prueba_tecnica_backend.infrastructure.config;
 import com.adiel.prueba_tecnica_backend.application.services.CreditService;
 import com.adiel.prueba_tecnica_backend.application.usecases.ApplyForCreditUseCaseImpl;
 import com.adiel.prueba_tecnica_backend.application.usecases.ApplyForCreditsUseCaseImpl;
+import com.adiel.prueba_tecnica_backend.application.utils.BusinessUtils;
 import com.adiel.prueba_tecnica_backend.domain.ports.out.BranchRepositoryPort;
 import com.adiel.prueba_tecnica_backend.domain.ports.out.ClientRepositoryPort;
 import com.adiel.prueba_tecnica_backend.domain.ports.out.RequestCreditRepositoryPort;
@@ -16,16 +17,26 @@ public class ApplicationConfig {
     public CreditService creditService(
             RequestCreditRepositoryPort requestCreditRepositoryPort,
             ClientRepositoryPort clientRepositoryPort,
-            BranchRepositoryPort branchRepositoryPort
+            BranchRepositoryPort branchRepositoryPort,
+            BusinessUtils businessUtils
             ){
         return new CreditService(
-                new ApplyForCreditUseCaseImpl(requestCreditRepositoryPort),
+                new ApplyForCreditUseCaseImpl(
+                        requestCreditRepositoryPort,
+                        businessUtils
+                ),
                 new ApplyForCreditsUseCaseImpl(
                         requestCreditRepositoryPort,
                         clientRepositoryPort,
-                        branchRepositoryPort
+                        branchRepositoryPort,
+                        businessUtils
                 )
         );
+    }
+
+    @Bean
+    public BusinessUtils utils(){
+        return new BusinessUtils();
     }
 
 }

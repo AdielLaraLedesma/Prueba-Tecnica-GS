@@ -1,30 +1,31 @@
 package com.adiel.prueba_tecnica_backend.application.usecases;
 
+import com.adiel.prueba_tecnica_backend.application.utils.BusinessUtils;
 import com.adiel.prueba_tecnica_backend.domain.models.*;
-import com.adiel.prueba_tecnica_backend.domain.ports.in.ApplyForCreditsUserCase;
+import com.adiel.prueba_tecnica_backend.domain.ports.in.ApplyForCreditsUseCase;
 import com.adiel.prueba_tecnica_backend.domain.ports.out.BranchRepositoryPort;
 import com.adiel.prueba_tecnica_backend.domain.ports.out.ClientRepositoryPort;
 import com.adiel.prueba_tecnica_backend.domain.ports.out.RequestCreditRepositoryPort;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.IntStream;
 
-public class ApplyForCreditsUseCaseImpl implements ApplyForCreditsUserCase {
-
-    private final Random random = new Random();
+public class ApplyForCreditsUseCaseImpl implements ApplyForCreditsUseCase {
     private final RequestCreditRepositoryPort repositoryPort;
     private final ClientRepositoryPort clientRepositoryPort;
     private final BranchRepositoryPort branchRepositoryPort;
+    private final BusinessUtils businessUtils;
 
     public ApplyForCreditsUseCaseImpl(
             RequestCreditRepositoryPort repositoryPort,
             ClientRepositoryPort clientRepositoryPort,
-            BranchRepositoryPort branchRepositoryPort) {
+            BranchRepositoryPort branchRepositoryPort,
+            BusinessUtils businessUtils) {
         this.repositoryPort = repositoryPort;
         this.clientRepositoryPort = clientRepositoryPort;
         this.branchRepositoryPort = branchRepositoryPort;
+        this.businessUtils = businessUtils;
     }
 
     @Override
@@ -33,14 +34,14 @@ public class ApplyForCreditsUseCaseImpl implements ApplyForCreditsUserCase {
         List<Branch> branchList = branchRepositoryPort.findAll();
 
         return IntStream.rangeClosed(1, total).mapToObj(element -> {
-            BigDecimal amount = this.generateAmount();
-            Long clientId = this.getRandomClientId(list);
-            Long branchId = this.getRandomBranchId(branchList);
+            BigDecimal amount = businessUtils.generateAmount();
+            Long clientId = businessUtils.getRandomClientId(list);
+            Long branchId = businessUtils.getRandomBranchId(branchList);
 
             CreditRequest request = new CreditRequest(clientId, amount, branchId);
 
             CreditDecision creditDecision;
-            if (isEligible(amount)) {
+            if (businessUtils.isEligible(amount)) {
                 creditDecision = CreditDecision.APPROVED;
             } else {
                 creditDecision = CreditDecision.REJECTED;
@@ -49,22 +50,4 @@ public class ApplyForCreditsUseCaseImpl implements ApplyForCreditsUserCase {
         }).toList();
     }
 
-    private Long getRandomBranchId(List<Branch> branchList) {
-        int anInt = random.nextInt(branchList.size());
-        return branchList.get(anInt).getId();
-    }
-
-    private Long getRandomClientId(List<Client> list) {
-        int anInt = random.nextInt(list.size());
-        return list.get(anInt).getId();
-    }
-
-    private BigDecimal generateAmount() {
-        int randomNumber = random.nextInt(10_000) + 1;
-        return BigDecimal.valueOf(randomNumber);
-    }
-
-    public boolean isEligible(BigDecimal amount) {
-        return amount.compareTo(BigDecimal.valueOf(5000)) <= 0;
-    }
 }

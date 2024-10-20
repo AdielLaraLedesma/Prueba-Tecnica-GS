@@ -3,22 +3,22 @@ package com.adiel.prueba_tecnica_backend.application.services;
 import com.adiel.prueba_tecnica_backend.domain.models.CreditRequest;
 import com.adiel.prueba_tecnica_backend.domain.models.CreditResponse;
 import com.adiel.prueba_tecnica_backend.domain.ports.in.ApplyForCreditUseCase;
-import com.adiel.prueba_tecnica_backend.domain.ports.in.ApplyForCreditsUserCase;
+import com.adiel.prueba_tecnica_backend.domain.ports.in.ApplyForCreditsUseCase;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CreditService implements ApplyForCreditUseCase, ApplyForCreditsUserCase {
+public class CreditService implements ApplyForCreditUseCase, ApplyForCreditsUseCase {
 
     private final ApplyForCreditUseCase applyForCreditUseCase;
-    private final ApplyForCreditsUserCase applyForCreditsUserCase;
+    private final ApplyForCreditsUseCase applyForCreditsUseCase;
 
     public CreditService(
             ApplyForCreditUseCase applyForCreditUseCase,
-            ApplyForCreditsUserCase applyForCreditsUserCase) {
+            ApplyForCreditsUseCase applyForCreditsUseCase) {
         this.applyForCreditUseCase = applyForCreditUseCase;
-        this.applyForCreditsUserCase = applyForCreditsUserCase;
+        this.applyForCreditsUseCase = applyForCreditsUseCase;
     }
 
     @Override
@@ -28,6 +28,6 @@ public class CreditService implements ApplyForCreditUseCase, ApplyForCreditsUser
 
     @Override
     public List<CreditResponse> applyCredit(int total) {
-        return applyForCreditsUserCase.applyCredit(total);
+        return applyForCreditsUseCase.applyCredit(total);
     }
 }
