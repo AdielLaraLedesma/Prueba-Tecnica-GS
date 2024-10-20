@@ -59,5 +59,5 @@ ALTER TABLE CreditRequest
 ADD CONSTRAINT CreditRequestBranchIdFK FOREIGN KEY (BranchId) REFERENCES Branch(Id);
 GO
 ALTER TABLE CreditRequest
-ADD CONSTRAINT CreditRequestClientIdFK FOREIGN KEY (ClientId) REFERENCES Branch(Id);
+ADD CONSTRAINT CreditRequestClientIdFK FOREIGN KEY (ClientId) REFERENCES Client(Id);
 GO
