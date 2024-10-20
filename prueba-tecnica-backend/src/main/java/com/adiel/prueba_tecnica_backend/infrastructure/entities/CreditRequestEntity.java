@@ -1,7 +1,16 @@
 package com.adiel.prueba_tecnica_backend.infrastructure.entities;
 
-import com.adiel.prueba_tecnica_backend.domain.models.*;
-import jakarta.persistence.*;
+import com.adiel.prueba_tecnica_backend.domain.models.CreditDecision;
+import com.adiel.prueba_tecnica_backend.domain.models.CreditRequest;
+import com.adiel.prueba_tecnica_backend.domain.models.CreditResponse;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
@@ -105,15 +114,4 @@ public class CreditRequestEntity {
         this.branchId = branchId;
     }
 
-    @Override
-    public String toString() {
-        return "CreditRequestEntity{" +
-                "id=" + id +
-                ", clientId=" + clientId +
-                ", amount=" + amount +
-                ", requestDate=" + requestDate +
-                ", status='" + status + '\'' +
-                ", branchId=" + branchId +
-                '}';
-    }
 }

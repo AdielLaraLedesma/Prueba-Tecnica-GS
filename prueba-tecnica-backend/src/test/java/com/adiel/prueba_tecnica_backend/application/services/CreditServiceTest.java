@@ -5,6 +5,7 @@ import com.adiel.prueba_tecnica_backend.domain.models.CreditRequest;
 import com.adiel.prueba_tecnica_backend.domain.models.CreditResponse;
 import com.adiel.prueba_tecnica_backend.domain.ports.in.ApplyForCreditUseCase;
 import com.adiel.prueba_tecnica_backend.domain.ports.in.ApplyForCreditsUseCase;
+import com.adiel.prueba_tecnica_backend.domain.ports.in.GetStatsUseCase;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,8 +16,11 @@ import org.mockito.MockitoAnnotations;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
@@ -30,6 +34,8 @@ class CreditServiceTest {
     ApplyForCreditUseCase applyForCreditUseCase;
     @Mock
     ApplyForCreditsUseCase applyForCreditsUseCase;
+    @Mock
+    GetStatsUseCase getStatsUseCase;
 
     AutoCloseable closeable;
 
@@ -77,6 +83,31 @@ class CreditServiceTest {
         assertEquals(expected.getBranchId(), result.getBranchId());
 
         verify(applyForCreditUseCase).applyCredit(any(CreditRequest.class));
+    }
+
+    @Test
+    void shouldGetStats(){
+        //Arrange
+        Map<Object, Long> expected = Map.of(
+                CreditDecision.APPROVED.name(), 3L,
+                CreditDecision.REJECTED.name(), 6L
+        );
+
+        doReturn(expected).when(getStatsUseCase).getStats();
+
+        //Act
+        Map<String, Long> result = underTest.getStats();
+
+        //Assert
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertTrue(result.containsKey(CreditDecision.APPROVED.name()));
+        assertEquals(expected.get(CreditDecision.APPROVED.name()), result.get(CreditDecision.APPROVED.name()));
+        assertTrue(result.containsKey(CreditDecision.REJECTED.name()));
+        assertEquals(expected.get(CreditDecision.REJECTED.name()), result.get(CreditDecision.REJECTED.name()));
+
+        verify(getStatsUseCase).getStats();
+
     }
 
     @Test

@@ -11,7 +11,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
@@ -41,11 +41,10 @@ class JpaBranchRepositoryAdapterTest {
     void shouldFindAll() {
         //Arrange
         BranchEntity branch1 = new BranchEntity();
+        branch1.setId(1L);
         branch1.setName("Nombre 1");
         branch1.setAddress("Direccion 1");
-        BranchEntity branch2 = new BranchEntity();
-        branch2.setName("Nombre 2");
-        branch2.setAddress("Direccion 2");
+        BranchEntity branch2 = new BranchEntity(2L, "Nombre 2", "Direccion 2");
 
 
         doReturn(List.of(branch1, branch2)).when(repository).findAll();
@@ -54,8 +53,11 @@ class JpaBranchRepositoryAdapterTest {
         List<Branch> result = underTest.findAll();
 
         //Assert
+        assertEquals(branch1.getId(), result.get(0).getId());
         assertEquals(branch1.getName(), result.get(0).getName());
         assertEquals(branch1.getAddress(), result.get(0).getAddress());
+
+        assertEquals(branch2.getId(), result.get(1).getId());
         assertEquals(branch2.getName(), result.get(1).getName());
         assertEquals(branch2.getAddress(), result.get(1).getAddress());
 

@@ -40,7 +40,6 @@ public class CreditRequestController {
 
     @PostMapping(path = "/simulate")
     public ResponseEntity<List<CreditResponse>> applyCredits(@PathParam("total") Integer total){
-        System.out.println("Total " + total);
         List<CreditResponse> response = creditService.applyCredit(total);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
