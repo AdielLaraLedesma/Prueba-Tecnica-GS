@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud de crédito</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Solicitud de crédito</h1>
+        <form id="creditForm">
+            <label for="clientId">ID del cliente:</label>
+            <input type="number" id="clientId" name="clientId" required>
+
+            <label for="branchId">ID de la sucursal:</label>
+            <input type="number" id="branchId" name="branchId" required>
+
+            <label for="creditAmount">Monto del cédito:</label>
+            <input type="number" id="creditAmount" name="creditAmount" required>
+
+            <button type="submit">Enviar solicitud</button>
+        </form>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
