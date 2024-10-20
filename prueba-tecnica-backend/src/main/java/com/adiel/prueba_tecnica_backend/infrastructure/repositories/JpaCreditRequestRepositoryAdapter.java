@@ -7,6 +7,8 @@ import com.adiel.prueba_tecnica_backend.domain.ports.out.RequestCreditRepository
 import com.adiel.prueba_tecnica_backend.infrastructure.entities.CreditRequestEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class JpaCreditRequestRepositoryAdapter implements RequestCreditRepositoryPort {
 
@@ -21,5 +23,10 @@ public class JpaCreditRequestRepositoryAdapter implements RequestCreditRepositor
         CreditRequestEntity entity = CreditRequestEntity.fromDomainModel(request, decision);
         CreditRequestEntity savedEntity = repository.save(entity);
         return savedEntity.toDomainModel();
+    }
+
+    @Override
+    public List<CreditResponse> findAll() {
+        return repository.findAll().stream().map(CreditRequestEntity::toDomainModel).toList();
     }
 }

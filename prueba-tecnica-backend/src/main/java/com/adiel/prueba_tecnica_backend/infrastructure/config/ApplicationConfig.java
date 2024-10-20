@@ -3,6 +3,7 @@ package com.adiel.prueba_tecnica_backend.infrastructure.config;
 import com.adiel.prueba_tecnica_backend.application.services.CreditService;
 import com.adiel.prueba_tecnica_backend.application.usecases.ApplyForCreditUseCaseImpl;
 import com.adiel.prueba_tecnica_backend.application.usecases.ApplyForCreditsUseCaseImpl;
+import com.adiel.prueba_tecnica_backend.application.usecases.GetStatsUseCaseImpl;
 import com.adiel.prueba_tecnica_backend.application.utils.BusinessUtils;
 import com.adiel.prueba_tecnica_backend.domain.ports.out.BranchRepositoryPort;
 import com.adiel.prueba_tecnica_backend.domain.ports.out.ClientRepositoryPort;
@@ -30,6 +31,9 @@ public class ApplicationConfig {
                         clientRepositoryPort,
                         branchRepositoryPort,
                         businessUtils
+                ),
+                new GetStatsUseCaseImpl(
+                        requestCreditRepositoryPort
                 )
         );
     }
