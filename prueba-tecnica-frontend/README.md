@@ -7,5 +7,5 @@ La instalación de este servicio se hará en Docker siguiendo los siguientes pas
 **_NOTA_**: Antes de ejecutar los comandos antes mencionados es necesario tener una red llamada "prueba-tecnica-net" para eso debes de ejecutar el siguiente comando:
 `docker network create prueba-tecnica-net`
 
-Una vez seguido esos pasos podemos dirigirnos a la ruta
+Una vez seguido esos pasos podemos dirigirnos a la pagina principal de la aplicacion:
 ``` http://localhost:80 ``` - [Link](http://localhost:80)
