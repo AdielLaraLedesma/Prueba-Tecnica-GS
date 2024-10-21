@@ -3,9 +3,6 @@ services:
   sqlserver:
     container_name: sqlserver
     hostname: sqlserver
-    ##build:
-    ##  context: sqlserverdocker
-    ##  dockerfile: Dockerfile
     image: mcr.microsoft.com/mssql/server:2019-lsatest
     ports:
       - "1433:1433"
