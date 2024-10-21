@@ -10,7 +10,7 @@ document.getElementById('creditForm').addEventListener('submit', function (event
         amount: parseFloat(creditAmount),
     };
 
-    fetch('http://localhost:8080/api/credit', {
+    fetch(`${config.baseUrlBackend}${config.urlPostCredit}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('http://localhost:8080/api/credit/stats')
+    fetch(`${config.baseUrlBackend}${config.urlGetStats}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error al obtener los datos de la API');
