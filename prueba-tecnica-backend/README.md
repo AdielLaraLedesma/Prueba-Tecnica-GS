@@ -43,7 +43,7 @@ HTTP:
 
 ## Instalacion
 La instalación de este servicio se hará en Docker siguiendo los siguientes pasos:
-- Ubicarse en la raiz del proyecto
+- Ubicarse en la raiz del proyecto `prueba-tecnica-backend`
 - Ejecutar en consola el comando `mvn clean install`
 - Ejecutar en consola `docker build -t prueba-tecnica-backend .`
 - Levantar el servicio con `docker run -d --network prueba-tecnica-net --name pruebatecnicabackend -p 8080:8080 prueba-tecnica-backend`
