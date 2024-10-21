@@ -1,0 +1,732 @@
+{
+	"info": {
+		"_postman_id": "dba5820e-5819-483f-b9a4-2d1a001e6f4b",
+		"name": "prueba-tecnica-collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13472815"
+	},
+	"item": [
+		{
+			"name": "POST CREDIT",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"clientId\": 1,\r\n    \"amount\": 100,\r\n    \"branchId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/credit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"credit"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "TC01 Solicitud aprobada",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clientId\": 1,\r\n    \"amount\": 1000,\r\n    \"branchId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/credit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"credit"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 21 Oct 2024 00:19:57 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1029,\n    \"clientId\": 1,\n    \"amount\": 1000,\n    \"requestDate\": \"2024-10-21T00:19:57.840271\",\n    \"decision\": \"APPROVED\",\n    \"branchId\": 1\n}"
+				},
+				{
+					"name": "TC02 Solicitud rechazada",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clientId\": 1,\r\n    \"amount\": 10000,\r\n    \"branchId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/credit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"credit"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 21 Oct 2024 00:20:44 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1030,\n    \"clientId\": 1,\n    \"amount\": 10000,\n    \"requestDate\": \"2024-10-21T00:20:44.381043\",\n    \"decision\": \"REJECTED\",\n    \"branchId\": 1\n}"
+				},
+				{
+					"name": "TC03 Cliente no existe",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clientId\": 5,\r\n    \"amount\": 10000,\r\n    \"branchId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/credit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"credit"
+							]
+						}
+					},
+					"status": "Conflict",
+					"code": 409,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 21 Oct 2024 00:21:26 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 409,\n    \"message\": \"El recurso relacionado no existe. Favor de verificar los datos enviados.\",\n    \"details\": \"could not execute statement [The INSERT statement conflicted with the FOREIGN KEY constraint \\\"CreditRequestClientIdFK\\\". The conflict occurred in database \\\"creditDB\\\", table \\\"dbo.Client\\\", column 'Id'.] [insert into CreditRequest (Amount,BranchId,ClientId,RequestDate,Status) values (?,?,?,?,?)]; SQL [insert into CreditRequest (Amount,BranchId,ClientId,RequestDate,Status) values (?,?,?,?,?)]; constraint [null]\"\n}"
+				},
+				{
+					"name": "TC04 Sucursal no existe",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clientId\": 1,\r\n    \"amount\": 10000,\r\n    \"branchId\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/credit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"credit"
+							]
+						}
+					},
+					"status": "Conflict",
+					"code": 409,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 21 Oct 2024 00:22:51 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 409,\n    \"message\": \"El recurso relacionado no existe. Favor de verificar los datos enviados.\",\n    \"details\": \"could not execute statement [The INSERT statement conflicted with the FOREIGN KEY constraint \\\"CreditRequestBranchIdFK\\\". The conflict occurred in database \\\"creditDB\\\", table \\\"dbo.Branch\\\", column 'Id'.] [insert into CreditRequest (Amount,BranchId,ClientId,RequestDate,Status) values (?,?,?,?,?)]; SQL [insert into CreditRequest (Amount,BranchId,ClientId,RequestDate,Status) values (?,?,?,?,?)]; constraint [null]\"\n}"
+				},
+				{
+					"name": "TC05 Cliente nulo",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clientId\": null,\r\n    \"amount\": 10000,\r\n    \"branchId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/credit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"credit"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 21 Oct 2024 00:23:19 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 400,\n    \"message\": \"Request invalido. Favor de validar los datos enviados.\",\n    \"details\": {\n        \"clientId\": \"El id del cliente no puede ser nulo\"\n    }\n}"
+				},
+				{
+					"name": "TC06 Importe igual a cero",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clientId\": 1,\r\n    \"amount\": 0,\r\n    \"branchId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/credit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"credit"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 21 Oct 2024 00:23:44 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 400,\n    \"message\": \"Request invalido. Favor de validar los datos enviados.\",\n    \"details\": {\n        \"amount\": \"El importe debe de ser mayor a cero\"\n    }\n}"
+				},
+				{
+					"name": "TC07 Importe nulo",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clientId\": 1,\r\n    \"amount\": null,\r\n    \"branchId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/credit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"credit"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 21 Oct 2024 00:24:21 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 400,\n    \"message\": \"Request invalido. Favor de validar los datos enviados.\",\n    \"details\": {\n        \"amount\": \"El importe no puede ser nulo\"\n    }\n}"
+				},
+				{
+					"name": "TC08 Sucursal nula",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clientId\": 1,\r\n    \"amount\": 100,\r\n    \"branchId\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/credit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"credit"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 21 Oct 2024 00:24:42 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 400,\n    \"message\": \"Request invalido. Favor de validar los datos enviados.\",\n    \"details\": {\n        \"branchId\": \"El id de la sucursal no puede ser nulo\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "POST CREDIT SIMULATE",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/credit/simulate?total=4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"credit",
+						"simulate"
+					],
+					"query": [
+						{
+							"key": "total",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "TC10 Simular 4 solicitudes",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/credit/simulate?total=4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"credit",
+								"simulate"
+							],
+							"query": [
+								{
+									"key": "total",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 21 Oct 2024 00:26:01 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1033,\n        \"clientId\": 2,\n        \"amount\": 5713,\n        \"requestDate\": \"2024-10-21T00:26:01.838281\",\n        \"decision\": \"REJECTED\",\n        \"branchId\": 2\n    },\n    {\n        \"id\": 1034,\n        \"clientId\": 3,\n        \"amount\": 430,\n        \"requestDate\": \"2024-10-21T00:26:01.857278\",\n        \"decision\": \"APPROVED\",\n        \"branchId\": 2\n    },\n    {\n        \"id\": 1035,\n        \"clientId\": 1,\n        \"amount\": 6479,\n        \"requestDate\": \"2024-10-21T00:26:01.874311\",\n        \"decision\": \"REJECTED\",\n        \"branchId\": 1\n    },\n    {\n        \"id\": 1036,\n        \"clientId\": 3,\n        \"amount\": 8584,\n        \"requestDate\": \"2024-10-21T00:26:01.89411\",\n        \"decision\": \"REJECTED\",\n        \"branchId\": 2\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "GET STATS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/credit/stats",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"credit",
+						"stats"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "TC09 Get stats",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/credit/stats",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"credit",
+								"stats"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 21 Oct 2024 00:25:19 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"rejected\": 45,\n    \"approved\": 36\n}"
+				}
+			]
+		}
+	]
+}
